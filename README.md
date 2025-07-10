@@ -2,6 +2,8 @@
 
 Este projeto é um sistema básico de CRUD (Create, Read, Update, Delete) para gerenciamento de usuários, desenvolvido com Node.js e Express. Ele permite cadastrar, visualizar, atualizar e remover usuários de um banco de dados de forma simples e eficiente. A API fornece dados para serem consumidos por um front-end que será produzido em breve!
 
+Inicialmente, foi desenvolvida uma simples interface com ejs para visualizar as páginas e facilitar as rotas com o HTTP sem necesidade de um testador de requisições HTTP.
+
 ## 🔧 Funcionalidades
 - Cadastrar Usuário – Criação de novos usuários no sistema.
 
@@ -71,5 +73,5 @@ Em breve
 
 ```
 Method: DELETE
-URL: http://localhost:3000/index/remover
+URL: http://localhost:3000/index/remover?usuario=(usuario.nome)
 ```
