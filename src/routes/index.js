@@ -21,12 +21,19 @@ const route = express.Router();
 route.get("/", async (req, res) => {
   const Usuario = require("../../models/usuario");
   const usuarios = await Usuario.findAll();
-  res.status(200).send(usuarios);
+  //Para ser consumido por aplicação front-end SPA
+  //res.status(200).send(usuarios);
+  //Para aplicação SSR
+  res.render("index", { usuarios: usuarios });
+});
+
+route.get("/cadastrar", (req, res) => {
+  res.render("cadastrarUsuario");
 });
 
 route.post("/cadastrar", async (req, res) => {
   try {
-    const { nome, senha, cargo } = req.query;
+    const { nome, senha, cargo } = req.body;
     if (!nome || !senha || !cargo) {
       res.status(400).send({ mensagem: "Campos Obrigatórios Estão Vazios" });
     }
@@ -41,6 +48,10 @@ route.post("/cadastrar", async (req, res) => {
     console.log(error);
     res.status(500).send({ mensagem: "Erro Interno Do Servidor" });
   }
+});
+
+route.get("/remover", (req, res) => {
+  res.render("removerUsuario");
 });
 
 route.delete("/remover", async (req, res) => {

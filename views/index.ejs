@@ -1,0 +1,39 @@
+<%- include("partials/head") %>
+    <h1 class="text-center">Usuários Cadastrados</h1>
+    <div class="usuarios-cadastrados container text-center">
+        <% usuarios.forEach((usuario) => { %>
+            <div class="row">
+                <div class="col">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="col">
+                    <p><%= usuario.nome %></p>
+                </div>
+                <div class="col">
+                    <p><%= usuario.cargo %></p>
+                </div>
+                <div class="col">
+                    <button onClick="removerUsuario('<%= usuario.nome %>')" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                </div>
+                <div class="col">
+                    <a href="/index/atualizar" class="btn btn-warning"><i class="fa-solid fa-pencil"></i></a>
+                </div>
+            </div>
+        <% }) %>
+        <a href="/index/cadastrar" class="btn btn-success">Adicionar Usuário</a>
+    </div>
+    <script>
+        function removerUsuario(usuario){
+            const requisicao = new XMLHttpRequest()
+            requisicao.open("DELETE","http://localhost:3000/index/remover?usuario=" + usuario,true)
+            requisicao.onload = function(){
+                if (requisicao.status === 200) {
+                    // Requisição DELETE bem-sucedida, recarrega a página
+                    location.reload();
+                } else {
+                    alert("Erro ao deletar o item.");
+                }
+            }
+            requisicao.send()
+        }
+<%- include("partials/footer") %>

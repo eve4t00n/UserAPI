@@ -3,11 +3,14 @@ const app = express();
 
 const indexRoute = require("./routes/index");
 
+app.set("view engine", "ejs");
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/index", indexRoute);
 
 app.get("/", (req, res) => {
-  res.send("Meu sistema de gerenciamento de usuários");
+  res.redirect("/index");
 });
 
 app.listen(3000, () => {
